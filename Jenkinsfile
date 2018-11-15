@@ -12,7 +12,7 @@ node {
   stage('Test') {
        echo 'Testinging....' 
        sh 'mvn test'
- 
+       junit '**/target/*.xml'
    }
   stage('Deploy') {
      echo 'Deploying....'
