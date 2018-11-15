@@ -28,8 +28,8 @@ node {
     
     fileOperations([fileCopyOperation(excludes: '', 
   flattenFiles: false, 
-  includes: '**/PipelineHW/target/*.jar', 
+  includes: '**/*.jar', 
   targetLocation: '/home/ivan/resultado/p1')])
      }
-  
+  deleteDir()
 }
