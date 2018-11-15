@@ -32,4 +32,5 @@ node {
   targetLocation: '/home/ivan/resultado/p1')])
      }
   deleteDir()
+  cleanWs()
 }
