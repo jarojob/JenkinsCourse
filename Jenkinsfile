@@ -25,6 +25,11 @@ node {
     ) {
      sh 'mvn package'
     }
+    
+    fileOperations([fileCopyOperation(excludes: '', 
+  flattenFiles: false, 
+  includes: '**/PipelineHW/*.jar', 
+  targetLocation: '/home/ivan/resultado/p1')])
      }
   
 }
