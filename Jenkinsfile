@@ -10,13 +10,21 @@ node {
       }
    }
   stage('Test') {
-       echo 'Testinging....' 
+       echo 'Testinging....'
+    withMaven(
+        maven:'Maven Test'
+    ) {
        sh 'mvn test'
-       junit '**/target/*.xml'
+    }
+     #  junit '**/target/*.xml'
    }
   stage('Deploy') {
      echo 'Deploying....'
+    withMaven(
+        maven:'Maven Test'
+    ) {
      sh 'mvn package'
+    }
      }
   
 }
