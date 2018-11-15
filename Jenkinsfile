@@ -3,8 +3,11 @@ node {
   checkout scm
   stage('Build') {
       echo 'Building....' 
-      sh 'mvn compile'
-   
+      withMaven(
+        maven:'Maven Test'
+      ) {
+        sh 'mvn compile'
+      }
    }
   stage('Test') {
        echo 'Testinging....' 
