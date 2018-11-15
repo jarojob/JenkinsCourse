@@ -28,7 +28,7 @@ node {
     
     fileOperations([fileCopyOperation(excludes: '', 
   flattenFiles: false, 
-  includes: '**/PipelineHW/*.jar', 
+  includes: '**/PipelineHW/target/*.jar', 
   targetLocation: '/home/ivan/resultado/p1')])
      }
   
