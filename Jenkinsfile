@@ -16,7 +16,7 @@ node {
     ) {
        sh 'mvn test'
     }
-     #  junit '**/target/*.xml'
+     
    }
   stage('Deploy') {
      echo 'Deploying....'
