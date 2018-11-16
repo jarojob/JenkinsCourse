@@ -1,36 +1,24 @@
 #!/usr/bin/env groovy
 node {
-  checkout scm
-  stage('Build') {
-      echo 'Building....' 
-      withMaven(
-        maven:'Maven Test'
-      ) {
-        sh 'mvn compile'
-      }
-   }
-  stage('Test') {
-       echo 'Testinging....'
-    withMaven(
-        maven:'Maven Test'
-    ) {
-       sh 'mvn test'
+    try {
+        stage('Test') {
+            sh 'echo "Fallo!"; exit 1'
+        }
+        echo 'Se ejecuta si exito'
+    } catch (e) {
+        echo 'Se ejecuta si fallo'
+        throw e
+    } finally {
+        def currentResult = currentBuild.result ?: 'SUCCESS'
+        if (currentResult == 'UNSTABLE') {
+            echo 'Se ejecuta si unstable'
+        }
+
+        def previousResult = currentBuild.previousBuild?.result
+        if (previousResult != null && previousResult != currentResult) {
+            echo 'Se ejecuta si hay cambio de estado'
+        }
+
+        echo 'Se ejecuta siempre'
     }
-     
-   }
-  stage('Deploy') {
-     echo 'Deploying....'
-    withMaven(
-        maven:'Maven Test'
-    ) {
-     sh 'mvn package'
-    }
-    
-    fileOperations([fileCopyOperation(excludes: '', 
-  flattenFiles: false, 
-  includes: '**/*.jar', 
-  targetLocation: '/home/ivan/resultado/p1')])
-     }
-  deleteDir()
-  cleanWs()
 }
